@@ -6,7 +6,11 @@
 
 #include <QApplication>
 #include <QMenu>
+#include <QDebug>
 #include <QDir>
+#include <QStyle>
+#include <QGuiApplication>
+#include <QStyleHints>
 
 namespace MenuIO
 {
@@ -107,10 +111,37 @@ void TrayIcon::createTrayIcon()
 {
 	menuOwner = new QWidget();
 	trayIcon  = new QSystemTrayIcon(this);
-    trayIcon->setToolTip(tr("JamesDSP for Linux"));
-    trayIcon->setIcon(QIcon::fromTheme("jamesdsp-tray", QIcon(":/icons/icon.png")));
+	trayIcon->setToolTip(tr("JamesDSP for Linux"));
 
-    connect(trayIcon, &QSystemTrayIcon::activated, this, &TrayIcon::iconEventHandler);
+	updateTheme();
+
+	connect(trayIcon, &QSystemTrayIcon::activated, this, &TrayIcon::iconEventHandler);
+}
+
+void TrayIcon::updateTheme()
+{
+    // Best effort theme detection
+    bool isDark = true;
+    QString gtkTheme = QString::fromLocal8Bit(qgetenv("GTK_THEME"));
+    Log::error(gtkTheme);
+    if (gtkTheme.contains("light"))
+        isDark = false;
+    else if (gtkTheme.contains("dark"))
+        isDark = true;
+    else {
+        // Try to derive from current app palette otherwise
+        QPalette pal = QApplication::palette();
+        isDark = pal.color(QPalette::Window).lightness() < 128;
+    }
+
+    if (isDark)
+    {
+        trayIcon->setIcon(QIcon::fromTheme("jamesdsp-tray", QIcon(":/icons/jamesdsp-tray.svg")));
+    }
+    else
+    {
+        trayIcon->setIcon(QIcon::fromTheme("jamesdsp-tray", QIcon(":/icons/jamesdsp-tray-light.svg")));
+    }
 }
 
 void TrayIcon::setTrayVisible(bool visible)

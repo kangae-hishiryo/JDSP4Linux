@@ -97,5 +97,7 @@
         <file>translations/jamesdsp_ko.qm</file>
         <file>translations/jamesdsp_nl.qm</file>
         <file>translations/jamesdsp_no.qm</file>
+        <file>icons/jamesdsp-tray.svg</file>
+        <file>icons/jamesdsp-tray-light.svg</file>
     </qresource>
 </RCC>

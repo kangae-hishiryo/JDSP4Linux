@@ -26,6 +26,7 @@ protected:
 public slots:
 	void   changedDisableFx(bool disabled);
 	void   setTrayVisible(bool visible);
+	void   updateTheme();
 
 signals:
 	void   iconActivated();

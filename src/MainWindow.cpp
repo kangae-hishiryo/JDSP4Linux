@@ -174,6 +174,8 @@ MainWindow::MainWindow(IAudioService* audioService,
         connect(_trayIcon, &TrayIcon::changeDisableFx, this,          &MainWindow::applyConfig);
 
         _trayIcon->setTrayVisible(AppConfig::instance().get<bool>(AppConfig::TrayIconEnabled) || _startupInTraySwitch);
+
+        connect(qApp, &QApplication::paletteChanged, _trayIcon, &TrayIcon::updateTheme);
     }
 
     // Populate preset lists

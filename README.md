@@ -488,6 +488,8 @@ The D-Bus introspection XML is available here: https://github.com/Audio4Linux/JD
 
 This project is licensed under [GPLv3](LICENSE).
 
+The project makes use of [Papirus icons](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) licensed under [GPLv3](LICENSE).
+
 ```
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
 INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
